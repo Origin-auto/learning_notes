@@ -1,13 +1,17 @@
-# 指定最低 CMake 版本
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.15)
+project(learning_notes LANGUAGES CXX)
 
-# 项目名称
-project(learning)
+# 强制所有输出到 build 目录
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-# 指定 C++ 标准（例如 C++17）
+# 自动收集 src 下所有 .cpp 文件
+file(GLOB SOURCES "src/*.cpp")
+
+# 创建可执行文件
+add_executable(${PROJECT_NAME} ${SOURCES})
+
+# 可选：指定 C++ 标准
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-# 添加可执行文件
-# 参数解释：生成的程序名  源文件路径
-add_executable(${PROJECT_NAME} src/main.cpp)
